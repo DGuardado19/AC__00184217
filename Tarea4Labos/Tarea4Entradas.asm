@@ -2,19 +2,21 @@ org 	100h
 
 section .text
         call texto
+        mov	dx,msg12
+	call	print
 	xor 	di, di 
 
-inicio:	cmp 	di,5d 
-	je	reset
+inicio:	
+        mov     bx, 0d
+        mov     ax, 0d
+        cmp 	di,5d 
+	je	loops
         call 	kbwait
         sub     al, 30h
 	mov	[300h+di], al 
 	inc 	di
 	jmp 	inicio
 
-reset:
-        mov     bx, 0d
-        mov     ax, 0d
 loops:    
         add     al, [300h+bx]
         inc     bx
@@ -115,5 +117,6 @@ msg8 	db 	"Colocho$"
 msg9 	db 	"Siempre me esfuerzo$"
 msg10 	db 	"Perfecto solo Dios$"
 msg11   db      "Int 21/09$"
+msg12   db      "Ingresa los ultimos 5 digitos de tu carnet: $"
 
 nl	db 	0xA, 0xD, "$"
